@@ -38,3 +38,51 @@ html, body {
 .country-name {
   font-weight: bold;
 }
+
+#prompt {
+  color: white;
+  background-color: rgba(254,107,32,.8);
+  position: absolute;
+  top: 0;
+  width: 300px;
+  left: calc(50% - 150px);
+  padding: 15px 20px;
+  text-align: center;
+  z-index: 500;
+  box-sizing: border-box;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+.leaflet-bar a, .reset, .leaflet-bar a:hover, .reset:hover {
+  background-color: rgba(101,105,110, .9);
+  color: white;
+}
+
+.leaflet-touch .leaflet-bar a, .reset {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.reset {
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  background-image: url(globe.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.leaflet-bar, .leaflet-touch .leaflet-bar {
+  border: none;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

@@ -3,7 +3,21 @@ Object.keys(codes).forEach(function (c) {
   codesByName[codes[c]] = c;
 });
 
-var map = L.map('map').setView([20, 0], 3);
+var map = L.map('map', {zoomControl: false}).setView([20, 0], 3);
+
+var reset = L.control({ position: 'bottomright' });
+reset.onAdd = function(map) {
+  var div = document.createElement('div');
+  div.className = 'reset';
+  div.onclick = function () {
+    map.setView([20, 0], 3);
+  };
+  return div;
+}
+reset.addTo(map);
+
+L.control.zoom({position: 'bottomright'}).addTo(map);
+
 
 var tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
@@ -24,7 +38,7 @@ var highlightedFeature;
 L.geoJSON(geojson, {
   style: function (){ return style; }
 }).on('click', function (e) {
-  e.originalEvent.stopPropagation()
+  document.getElementById('prompt').style.display = 'none';
   if (highlightedFeature != e.layer) {
     highlightFeature(e.layer);
     showProbe(e.layer.feature, e.containerPoint);
