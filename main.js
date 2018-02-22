@@ -3,7 +3,10 @@ Object.keys(codes).forEach(function (c) {
   codesByName[codes[c]] = c;
 });
 
-var map = L.map('map', {zoomControl: false}).setView([20, 0], 3);
+var initCenter = [20, 0];
+var initZoom = 3;
+
+var map = L.map('map', {zoomControl: false}).setView(initCenter, initZoom);
 
 var reset = L.control({ position: 'bottomright' });
 reset.onAdd = function(map) {
@@ -39,6 +42,8 @@ L.geoJSON(geojson, {
   style: function (){ return style; }
 }).on('click', function (e) {
   document.getElementById('prompt').style.display = 'none';
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(resetAll, 60000);
   if (highlightedFeature != e.layer) {
     highlightFeature(e.layer);
     showProbe(e.layer.feature, e.containerPoint);
@@ -56,6 +61,9 @@ map.on('zoom', function () {
     removeHighlight();
     hideProbe();
   }
+}).on('move', function () {
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(resetAll, 60000);
 });
 
 function highlightFeature (layer) {
@@ -94,4 +102,10 @@ function showProbe (feature, point) {
 
 function hideProbe () {
   document.getElementById('probe').style.display = 'none';
+}
+
+var resetTimer;
+function resetAll () {
+  document.getElementById('prompt').style.display = 'block';
+  map.setView(initCenter, initZoom);
 }
