@@ -61,6 +61,7 @@ L.geoJSON(geojson, {
 map.on('zoom', function () {
   removeHighlight();
   hideProbe();
+  alert(map.getZoom());
 }).on('click', function (e) {
   let { target } = e.originalEvent;
   if (!target || target.tagName.toLowerCase() !== 'path') {
