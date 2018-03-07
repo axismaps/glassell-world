@@ -96,7 +96,7 @@ function showProbe(feature, point) {
   let img = iso2 ? ('<img src="flags/' + iso2.toLowerCase() + '.png"/>') : '';
   probe.innerHTML = img + '<span class="country-name">' + feature.properties.NAME + '</span><br>' +
     'Population: ' + feature.properties.POP_EST.toLocaleString() + '<br>' +
-    'GDP: US $' + feature.properties.GDP_MD_EST.toLocaleString() + '<br>' +
+    'GDP per capita: US $' + Math.round((feature.properties.GDP_MD_EST * 1000000) / feature.properties.POP_EST).toLocaleString() + '<br>' +
     'Income Group: ' + feature.properties.INCOME_GRP.slice(3).replace(' income', '').replace(': OECD', '');
   probe.style.display = 'block';
   let w = probe.offsetWidth;
