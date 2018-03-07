@@ -39,7 +39,7 @@ let style = {
   fillOpacity: 0,
   stroke: false,
   color: '#EB6E2E',
-  weight: 6
+  weight: 3
 };
 
 let highlightedFeature;
