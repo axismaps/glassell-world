@@ -30,7 +30,8 @@ L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
-  maxZoom: 16
+  maxZoom: 16,
+  minZoom: 1
 }).addTo(map);
 
 let geojson = topojson.feature(countriesData, countriesData.objects.countries);
@@ -61,7 +62,6 @@ L.geoJSON(geojson, {
 map.on('zoom', function () {
   removeHighlight();
   hideProbe();
-  alert(map.getZoom());
 }).on('click', function (e) {
   let { target } = e.originalEvent;
   if (!target || target.tagName.toLowerCase() !== 'path') {
