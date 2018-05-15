@@ -12,7 +12,10 @@ let initCenter = [20, 0];
 let initZoom = 3;
 let resetTimer;
 
-let map = L.map('map', { zoomControl: false }).setView(initCenter, initZoom);
+let map = L.map('map', {
+  zoomControl: false,
+  maxBounds: [[-90, -180], [90, 180]]
+}).setView(initCenter, initZoom);
 
 let reset = L.control({ position: 'bottomright' });
 reset.onAdd = function () {
